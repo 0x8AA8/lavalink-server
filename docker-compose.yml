@@ -2,31 +2,12 @@ services:
   lavalink:
     image: ghcr.io/lavalink-devs/lavalink:4-alpine
     restart: unless-stopped
-
     environment:
       - _JAVA_OPTIONS=${JAVA_OPTIONS:--Xmx1G}
       - SERVER_PORT=${SERVER_PORT:-2333}
-      - LAVALINK_SERVER_PASSWORD=${LAVALINK_SERVER_PASSWORD:?}
-
-    # Option A: use application.yml from repo (bind-mounted)
+      - LAVALINK_SERVER_PASSWORD=${LAVALINK_SERVER_PASSWORD}
     volumes:
-      - type: bind
-        source: ./application.yml
-        target: /opt/Lavalink/application.yml
-
-      # Persist plugins between restarts
-      - type: bind
-        source: ./plugins
-        target: /opt/Lavalink/plugins/
-        is_directory: true
-
-    expose:
+      - ./application.yml:/opt/Lavalink/application.yml
+      - ./plugins:/opt/Lavalink/plugins/
+    ports:
       - "2333:2333"
-
-    # Option B (public): uncomment to bind host port (exposes on server IP)
-    # ports:
-    #   - "2333:2333"
-    #
-    # Option B (localhost only): uncomment to restrict to the server itself
-    # ports:
-    #   - "127.0.0.1:2333:2333"
