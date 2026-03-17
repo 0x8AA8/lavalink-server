@@ -2,7 +2,6 @@ services:
   lavalink:
     image: ghcr.io/lavalink-devs/lavalink:4-alpine
     restart: unless-stopped
-    user: "1000:1000"   # add this
     environment:
       - _JAVA_OPTIONS=${JAVA_OPTIONS:--Xmx1G}
       - SERVER_PORT=${SERVER_PORT:-2333}
