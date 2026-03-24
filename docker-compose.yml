@@ -10,6 +10,6 @@ services:
       SPOTIFY_CLIENT_SECRET: ${SPOTIFY_CLIENT_SECRET:-}
     volumes:
       - ./application.yml:/opt/Lavalink/application.yml:ro
-      - ./plugins:/opt/Lavalink/plugins:ro
+      - ./plugins:/opt/Lavalink/plugins
     ports:
       - "${SERVER_PORT:-2333}:2333"
