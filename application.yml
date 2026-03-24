@@ -24,16 +24,6 @@ lavalink:
     youtubeSearchEnabled: true
     soundcloudSearchEnabled: true
 
-  plugins:
-    # YouTube (youtube-source) plugin
-    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.0"
-      snapshot: false
-
-    # Spotify + others (LavaSrc)
-    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.1"
-      repository: "https://maven.lavalink.dev/releases"
-      snapshot: false
-
 # IMPORTANT: "plugins:" must be at ROOT (not under "lavalink:")
 plugins:
   youtube:
