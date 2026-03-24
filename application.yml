@@ -1,0 +1,72 @@
+server:
+  port: ${SERVER_PORT:2333}
+  address: 0.0.0.0
+
+lavalink:
+  server:
+    password: ${LAVALINK_SERVER_PASSWORD:Candy@03041993}
+
+    sources:
+      # Required when using youtube-source plugin
+      youtube: false
+
+      # Keep SoundCloud enabled
+      soundcloud: true
+
+      # Optional other built-in sources
+      bandcamp: true
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+
+    # Search toggles (keep enabled)
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: true
+
+  plugins:
+    # YouTube (youtube-source) plugin
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.0"
+      snapshot: false
+
+    # Spotify + others (LavaSrc)
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.1"
+      repository: "https://maven.lavalink.dev/releases"
+      snapshot: false
+
+# IMPORTANT: "plugins:" must be at ROOT (not under "lavalink:")
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    clients:
+      - MUSIC
+      - ANDROID_VR
+      - WEB
+      - WEBEMBEDDED
+
+  lavasrc:
+    providers:
+      # If ISRC exists, try a precise YouTube match first
+      - "ytsearch:\"%ISRC%\""
+      # Fallback to normal query search
+      - "ytsearch:%QUERY%"
+      # Optional fallback to SoundCloud search
+      - "scsearch:%QUERY%"
+
+    sources:
+      spotify: true
+      applemusic: false
+      deezer: false
+      yandexmusic: false
+      flowerytts: false
+      youtube: false
+      vkmusic: false
+      tidal: false
+
+    spotify:
+      clientId: ${SPOTIFY_CLIENT_ID:}
+      clientSecret: ${SPOTIFY_CLIENT_SECRET:}
+      countryCode: "US"
